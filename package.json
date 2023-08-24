@@ -1,0 +1,12 @@
+{
+  "name": "support-desk",
+  "version": "1.0.0",
+  "description": "Support Ticket application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "author": "Moein Samani",
+  "license": "MIT"
+}
