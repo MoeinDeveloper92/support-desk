@@ -1,9 +1,12 @@
 const express = require("express")
 const dotenv = require("dotenv").config()
+const colors = require("colors")
+const connectDB = require("./config/db")
 const PORT = process.env.PORT || 5000
 const userRoute = require("./routes/userRoutes")
 const { errorHandler } = require("./middleware/errorMiddleware")
 const app = express()
+connectDB()
 
 app.get("/", (req, res) => {
     res.status(200).json({
@@ -11,12 +14,18 @@ app.get("/", (req, res) => {
     })
 })
 
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 //Ruoutes
 app.use("/api/users", userRoute)
 app.use(errorHandler)
+
+
+
+
 app.listen(PORT, () => {
     console.log(`The server is running on the port ${PORT}`)
 })
