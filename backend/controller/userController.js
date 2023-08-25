@@ -92,9 +92,13 @@ const loginUser = asyncHandlers(async (req, res, next) => {
 //@route    GET /api/users/me
 //@access   Private
 const getMe = asyncHandlers(async (req, res, next) => {
+    const user = {
+        id: req.user._id,
+        name: req.user.name,
+        email: req.user.email
+    }
 
-
-    res.status(200).json(req.user)
+    res.status(200).json(user)
 })
 
 
