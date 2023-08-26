@@ -2,6 +2,7 @@ const express = require("express")
 const dotenv = require("dotenv").config()
 const colors = require("colors")
 const connectDB = require("./config/db")
+const ticketRoute = require("./routes/ticketRoutes")
 const PORT = process.env.PORT || 5000
 const userRoute = require("./routes/userRoutes")
 const { errorHandler } = require("./middleware/errorMiddleware")
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }))
 
 //Ruoutes
 app.use("/api/users", userRoute)
+app.use("/api/tickets", ticketRoute)
 app.use(errorHandler)
 
 
