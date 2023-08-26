@@ -5,6 +5,8 @@ import { motion } from "framer-motion"
 import { useSelector, useDispatch } from "react-redux"
 import { register, reset } from '../features/auth/authSlice'
 import { useNavigate } from "react-router-dom"
+
+
 function Register() {
 
     const [formData, setFormData] = useState({
@@ -24,17 +26,15 @@ function Register() {
         //if there is any error show below
         if (isError) {
             //this message comes from api
-
             toast.error(message)
         }
-
+        //Redirect the user
         if (isSuccess || user) {
-            toast.success("You are Registered!")
             navigate("/")
         }
-
         dispatch(reset())
-    }, [navigate, dispatch, message, isSuccess, user])
+
+    }, [navigate, isError, dispatch, message, isSuccess, user])
 
 
     const handleChange = (e) => {
