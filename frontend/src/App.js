@@ -8,6 +8,7 @@ import Header from './components/Header'
 import { ToastContainer } from "react-toastify"
 import NewTicket from './pages/NewTicket'
 import "react-toastify/dist/ReactToastify.css"
+import Tickets from './pages/Tickets'
 function App() {
   return (
     <div className='container'>
@@ -16,9 +17,15 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='' element={<PrivateRoute />}>
+
+        <Route path='/new-ticket' element={<PrivateRoute />}>
           <Route path='/new-ticket' element={<NewTicket />} />
         </Route>
+
+        <Route path='/tickets' element={<PrivateRoute />}>
+          <Route path='/tickets' element={<Tickets />} />
+        </Route>
+
       </Routes>
       <ToastContainer />
     </div>

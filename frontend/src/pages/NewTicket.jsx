@@ -1,20 +1,56 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { createTicket, reset } from '../features/ticket/ticketSlice'
+import Spinner from '../components/Spinner'
+import BackButton from '../components/BackButton'
+import { motion } from "framer-motion"
+
 
 function NewTicket() {
     const { user } = useSelector((state) => state.auth)
+    const { isLoading, isError, isSuccess, message } = useSelector((state) => state.ticket)
     const [name] = useState(user.name)
     const [email] = useState(user.email)
     const [product, setProduct] = useState("iPhone")
     const [description, setDescription] = useState("")
 
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+
+        if (isSuccess) {
+            dispatch(reset())
+            navigate("/tickets")
+        }
+
+        dispatch(reset())
+    }, [dispatch, navigate, isError, isSuccess, message])
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        dispatch(createTicket({ description, product }))
     }
 
+    if (isLoading) {
+        return <Spinner />
+    }
     return (
-        <>
+        <motion.div
+            initial={{
+                y: "-100%"
+            }}
+            animate={{
+                y: "0"
+            }}
+        >
+            <BackButton url={"/"} />
             <section className="heading">
                 <h1>Create New Ticket</h1>
                 <p>Please Fill Out The Form Below</p>
@@ -44,7 +80,7 @@ function NewTicket() {
                         <label htmlFor="product">Product</label>
                         <select onChange={(e) => setProduct(e.target.value)} value={product} name="product" id="product">
                             <option value="iPhone">iPhone</option>
-                            <option value="MacBook">MacBook</option>
+                            <option value="MacBook Pro">MacBook</option>
                             <option value="iMac">iMac</option>
                             <option value="iPad">iPad</option>
                         </select>
@@ -61,7 +97,7 @@ function NewTicket() {
                     </div>
                 </form>
             </section>
-        </>
+        </motion.div>
     )
 }
 
