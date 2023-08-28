@@ -58,6 +58,8 @@ function Tickets() {
                         <TicketItem ticket={ticket} />
                     </motion.div>
                 ))}
+
+
             </div>
         </>
     );
