@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler")
 const { User } = require("../model/userModel")
 const Ticket = require("../model/ticketModel")
 
+
+
 //@desc     Get all the user's ticklet
 //@route    GET /api/tickets
 //@access   Private
