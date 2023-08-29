@@ -9,6 +9,8 @@ import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
 import NoteItem from '../components/NoteItem';
 import { FaPlus } from "react-icons/fa"
+
+
 const customStyles = {
     content: {
         width: "600px",
